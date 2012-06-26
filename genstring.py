@@ -187,9 +187,9 @@ def localize(path):
                 os.rename(original, old)
             except:
                 os.system('iconv -f UTF-16 -t UTF-8 "%s" > "%s"' % (original, old))
-
+                
             # gen
-            os.system('genstrings -q -o "%s" `find %s -name "*.m"`' % (language, path))
+            os.system('find %s -name \*.m | xargs genstrings -q -o "%s"' % (path, language))
 
             try:
                 open(original, encoding='utf_8', mode='r').read()
@@ -201,7 +201,7 @@ def localize(path):
             merge(merged, old, new)
             logging.info("Job done for language: %s" % language)
         else:
-            os.system('genstrings -q -o "%s" `find . -name "*.m"`' % language)
+            os.system('genstrings -q -o "%s" `find %s -name "*.m"`' % (language, path))
             os.rename(original, old)
             try:
                 open(old, encoding='utf_8', mode='r').read()
