@@ -14,11 +14,9 @@ Usage
 
 Known Issues
 ---
-* You need to respect the format used by the genstrings command unless it breaks
-So to avoid issues use strictly this format for each translated text.
+* You need to respect the format used by the genstrings command unless it will breaks.
+So, to avoid issues use strictly the format below for each translated text.
 Also do not remove the line break between two fields or it will breaks too.
-
-So this format (used by the genstrings command), and everything should be fine
 
     /* Comment for localizable string */
     "Your string" = "Translated string";
