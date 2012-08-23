@@ -76,13 +76,18 @@ class LocalizedString():
 class LocalizedFile():
     def __init__(self, fname=None, auto_read=False):
         self.fname = fname
-        self.strings = []
-        self.strings_d = {}
+        self.reset()
  
         if auto_read:
             self.read_from_file(fname)
- 
+    
+    def reset(self):
+        self.strings = []
+        self.strings_d = {}
+
     def read_from_file(self, fname=None):
+        self.reset()
+
         fname = self.fname if fname == None else fname
         try:
             #f = open(fname, encoding='utf_8', mode='r')
@@ -119,7 +124,7 @@ class LocalizedFile():
             if line and re_translation.match(line):
                 translation = line
             else:
-                logging.error("Line %d raising the exception: %s" % (i, line))
+                logging.error("Line %d of file '%s' raising the exception: %s" % (i, self.fname, line))
                 raise Exception('invalid file')
  
             line = f.readline()
@@ -141,7 +146,10 @@ class LocalizedFile():
         except:
             print 'Couldn\'t open file %s.' % fname
             exit(-1)
- 
+        
+        # sort by key
+        self.strings.sort(key=lambda item: item.key)
+
         for string in self.strings:
             f.write(string.__unicode__())
  
@@ -160,6 +168,12 @@ class LocalizedFile():
             merged.strings_d[string.key] = string
  
         return merged
+
+    def update_with(self, new):
+        for string in new.strings:
+            if not self.strings_d.has_key(string.key):
+                self.strings.append(string)
+                self.strings_d[string.key] = string
  
 def merge(merged_fname, old_fname, new_fname):
     try:
