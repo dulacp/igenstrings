@@ -81,7 +81,7 @@ class LocalizedFile():
  
         if auto_read:
             self.read_from_file(fname)
- 
+
     def read_from_file(self, fname=None):
         fname = self.fname if fname == None else fname
         try:
@@ -119,7 +119,7 @@ class LocalizedFile():
             if line and re_translation.match(line):
                 translation = line
             else:
-                logging.error("Line %d raising the exception: %s" % (i, line))
+                logging.error("Line %d of file '%s' raising the exception: %s" % (i, self.fname, line))
                 raise Exception('invalid file')
  
             line = f.readline()
