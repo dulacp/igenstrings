@@ -187,9 +187,10 @@ def merge(merged_fname, old_fname, new_fname):
  
 STRINGS_FILE = 'Localizable.strings'
  
-def localize(path):
+def localize(path, excluded_paths):
     languages = [os.path.join(path,name) for name in os.listdir(path) if name.endswith('.lproj') and os.path.isdir(os.path.join(path,name))]
     print "languages found", languages
+
     for language in languages:
         original = merged = language + os.path.sep + STRINGS_FILE
         old = original + '.old'
@@ -203,7 +204,7 @@ def localize(path):
                 os.system('iconv -f UTF-16 -t UTF-8 "%s" > "%s"' % (original, old))
                 
             # gen
-            os.system('find %s -name \*.m | xargs genstrings -q -o "%s"' % (path, language))
+            os.system('find %s -name \*.m -not -path "%s" | xargs genstrings -q -o "%s"' % (path, excluded_paths, language))
 
             try:
                 open(original, encoding='utf_8', mode='r').read()
@@ -215,7 +216,7 @@ def localize(path):
             merge(merged, old, new)
             logging.info("Job done for language: %s" % language)
         else:
-            os.system('genstrings -q -o "%s" `find %s -name "*.m"`' % (language, path))
+            os.system('genstrings -q -o "%s" `find %s -name "*.m" -not -path "%s"`' % (language, path, excluded_paths))
             os.rename(original, old)
             try:
                 open(old, encoding='utf_8', mode='r').read()
@@ -244,6 +245,10 @@ def parse_options():
             action="store", type="str", default=os.getcwd(), dest="path",
             help="Path (relative or absolute) to use for searching for *.lproj directories")
 
+    parser.add_option("-e", "--exclude",
+            action="store", type="str", default=None, dest="excluded_paths",
+            help="Regex for paths to exclude ex. ``./Folder1/*``")
+
     opts, args = parser.parse_args()
     return opts, args
 
@@ -253,5 +258,7 @@ if __name__ == '__main__':
         logging.getLogger().level = logging.DEBUG
     if opts.path:
         opts.path = os.path.realpath(opts.path)
+    if opts.excluded_paths:
+        opts.excluded_paths = os.path.realpath(opts.excluded_paths)
     logging.info("Running the script on path %s" % opts.path)
-    localize(opts.path)
+    localize(opts.path, opts.excluded_paths)
