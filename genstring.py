@@ -117,7 +117,10 @@ class LocalizedFile():
 
             # handle multi lines
             while len(line) > 1 and line[-2] != u';':
-                line += f.readline()
+                nextline = f.readline()
+                if not nextline:
+                    nextline = '\n'
+                line += nextline
                 i += 1
 
             logging.debug("%d %s" % (i, line.rstrip('\n')))
