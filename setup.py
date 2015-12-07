@@ -15,11 +15,11 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
 requirements = [
-    # TODO: put package requirements here
+    'clint',
 ]
 
 test_requirements = [
-    # TODO: put package test requirements here
+
 ]
 
 setup(
@@ -40,6 +40,11 @@ setup(
     license="ISCL",
     zip_safe=False,
     keywords='igenstrings',
+    entry_points={
+        'console_scripts': [
+            'igenstrings = igenstrings.cli:main',
+        ],
+    },
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
