@@ -154,8 +154,8 @@ def merge(merged_fname, old_fname, new_fname):
         raise
 
 
-def merge_localized_strings(path, excluded_paths):
-    logger.info("Excluded paths: {}".format(excluded_paths))
+def merge_localized_strings(path, excluded_paths, logging_level=logging.INFO):
+    logger.level = logging_level
 
     languages = []
     for root, dirs, files in os.walk(path):

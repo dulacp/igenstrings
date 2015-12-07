@@ -1,35 +1,32 @@
 from os import getcwd
 from os.path import realpath
-from argparse import ArgumentParser
+import logging
 
-from clint import arguments
+import click
 
-from parser import merge_localized_strings
+from .parser import merge_localized_strings
 
 
-if __name__ == '__main__':
-    parser = ArgumentParser()
+@click.command()
+@click.option('--debug',
+    default=False,
+    help='Set to DEBUG the logging level (default to INFO)')
+@click.option('--path',
+    prompt='Indicate the project classes directory path',
+    help='Path (relative or absolute) to use for searching for *.lproj directories')
+@click.option('--excluded-path',
+    default=None,
+    help='Regex for paths to exclude eg. ``./Folder1/*``')
+def main(debug, path, excluded_path):
+    if debug:
+        logging_level = logging.DEBUG
+    else:
+        logging_level = logging.INFO
+    if path:
+        path = realpath(path)
+    if excluded_path:
+        excluded_path = realpath(excluded_path)
 
-    parser.add_argument("-d", "--debug",
-            action="store_true", default=False, dest="debug",
-            help="Set to DEBUG the logging level (default to INFO)")
-
-    parser.add_argument("-p", "--path",
-            action="store", type=str, default=None, dest="path",
-            help="Path (relative or absolute) to use for searching for *.lproj directories")
-
-    parser.add_argument("-e", "--exclude",
-            action="store", type=str, default=None, dest="excluded_paths",
-            help="Regex for paths to exclude eg. ``./Folder1/*``")
-
-    opts = parser.parse_args()
-
-    if opts.debug:
-        logger.level = logging.DEBUG
-    if opts.path:
-        opts.path = realpath(opts.path)
-    if opts.excluded_paths:
-        opts.excluded_paths = realpath(opts.excluded_paths)
-
-    logger.info("Running the script on path %s" % opts.path)
-    merge_localized_strings(opts.path, opts.excluded_paths)
+    click.echo(click.style('Running the script on path {}'.format(path), fg='green'))
+    click.echo(click.style('Excluded path regex: {}'.format(excluded_path), fg='red'))
+    merge_localized_strings(path, excluded_path, logging_level=logging_level)
