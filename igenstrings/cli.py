@@ -12,7 +12,6 @@ from .parser import merge_localized_strings
     default=False,
     help='Set to DEBUG the logging level (default to INFO)')
 @click.option('--path',
-    prompt='Indicate the project classes directory path',
     help='Path (relative or absolute) to use for searching for *.lproj directories')
 @click.option('--excluded-path',
     default=None,
