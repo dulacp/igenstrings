@@ -9,8 +9,9 @@ Tests for `igenstrings` module.
 """
 
 import unittest
+from codecs import open
 
-from igenstrings import igenstrings
+from igenstrings import parser
 
 
 class TestIgenstrings(unittest.TestCase):
@@ -21,8 +22,12 @@ class TestIgenstrings(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def test_000_something(self):
-        pass
+    def test_keep_existing_translated_strings(self):
+        parser.merge_localized_strings('tests/objc', None)
+        content = None
+        with open('tests/objc/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
+            content = fr_locale_file.read()
+        self.assertIn('Bonjour', content)
 
 
 if __name__ == '__main__':
