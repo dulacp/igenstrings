@@ -28,8 +28,3 @@ class TestIgenstrings(unittest.TestCase):
         with open('tests/objc/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
             content = fr_locale_file.read()
         self.assertIn('Bonjour', content)
-
-
-if __name__ == '__main__':
-    import sys
-    sys.exit(unittest.main())
