@@ -14,9 +14,8 @@
 
 ## Contents
 
-* [README][readme]
-* [Installation][installation]
-* [Usage][usage]
-* [Contributing][contributing]
-* [Authors][authors]
-* [History][history]
+- [Installation][installation]
+- [Usage][usage]
+
+[installation]: installation.md
+[usage]: usage.md
