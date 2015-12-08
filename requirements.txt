@@ -1,0 +1,33 @@
+## Code styling
+
+# PEP8 code linting, which we run on all commits.
+flake8==2.4.0
+pep8==1.5.7
+
+# Sort and lint imports
+#isort==4.2.2
+
+
+## Testing
+
+# PyTest for running the tests.
+pytest==2.6.4
+pytest-cov==1.8.1
+
+
+## Documentation
+
+# MkDocs to build our documentation.
+mkdocs==0.13.2
+
+
+## Packing
+
+# Wheel for PyPI installs.
+wheel==0.24.0
+
+# Twine for secured PyPI uploads.
+twine==1.4.0
+
+# Transifex client for managing translation resources.
+transifex-client==0.11
