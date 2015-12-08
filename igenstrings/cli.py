@@ -8,15 +8,16 @@ from .parser import merge_localized_strings
 
 
 @click.command()
+@click.argument('path',
+    type=click.Path(exists=True))
 @click.option('--debug',
     default=False,
-    help='Set to DEBUG the logging level (default to INFO)')
-@click.option('--path',
-    help='Path (relative or absolute) to use for searching for *.lproj directories')
+    is_flag=True,
+    help='Configure the output for debugging purposes')
 @click.option('--excluded-path',
     default=None,
     help='Regex for paths to exclude eg. ``./Folder1/*``')
-def main(debug, path, excluded_path):
+def main(path, debug, excluded_path):
     if debug:
         logging_level = logging.DEBUG
     else:
@@ -28,4 +29,7 @@ def main(debug, path, excluded_path):
 
     click.echo(click.style('Running the script on path {}'.format(path), fg='green'))
     click.echo(click.style('Excluded path regex: {}'.format(excluded_path), fg='red'))
+    if logging_level == logging.DEBUG:
+        click.echo(click.style('Debug mode is on', fg='red'))
+
     merge_localized_strings(path, excluded_path, logging_level=logging_level)
