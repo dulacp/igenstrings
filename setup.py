@@ -7,13 +7,6 @@ try:
 except ImportError:
     from distutils.core import setup
 
-
-with open('README.rst') as readme_file:
-    readme = readme_file.read()
-
-with open('HISTORY.rst') as history_file:
-    history = history_file.read().replace('.. :changelog:', '')
-
 requirements = [
     'click',
 ]
@@ -26,7 +19,6 @@ setup(
     name='igenstrings',
     version='0.1.0',
     description="Enhance the genstrings command by adding merging capabilities",
-    long_description=readme + '\n\n' + history,
     author="Pierre Dulac",
     author_email='pierre@dulaccc.me',
     url='https://github.com/dulaccc/igenstrings',

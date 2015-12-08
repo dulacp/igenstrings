@@ -61,15 +61,7 @@ coverage:
 	$(BROWSER) htmlcov/index.html
 
 docs:
-	rm -f docs/igenstrings.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ igenstrings
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
-
-servedocs: docs
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+	mkdocs build
 
 release: clean
 	python setup.py sdist upload

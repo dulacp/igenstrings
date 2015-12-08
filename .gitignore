@@ -34,8 +34,10 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
+# Docs / Unit test / coverage reports
+/site/
+/htmlcov/
+/coverage/
 .tox/
 .coverage
 .coverage.*
