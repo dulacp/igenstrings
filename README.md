@@ -15,6 +15,22 @@ Documentation is available at [https://igenstrings.readthedocs.org][docs].
 * Merge the results with previous version of the Localizable.string files you may have
 * Inform you if it works correctly
 
+## Usage
+
+```sh
+$ igenstrings ./MyXcodeProjectDir
+```
+
+*output*
+
+```sh
+Running the script on path ./MyXcodeProjectDir
+Excluded path regex: None
+languages found : ['./MyXcodeProjectDir/en.lproj', './MyXcodeProjectDir/fr.lproj']
+Job done for language: ./MyXcodeProjectDir/en.lproj
+Job done for language: ./MyXcodeProjectDir/fr.lproj
+```
+
 ## Known Issues
 
 * genstrings doesn't like path containing spaces, so avoid subfolders containing spaces.
