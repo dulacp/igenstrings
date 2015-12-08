@@ -1,23 +1,75 @@
 # Config file for automatic testing at travis-ci.org
 # This file will be regenerated if you run travis_pypi_setup.py
 
-os: osx
-
 language: python
 
-env:
-  - TOXENV=py35
-  - TOXENV=py34
-  - TOXENV=py33
-  - TOXENV=py27
-  - TOXENV=py26
-  - TOXENV=pypy
+cache:
+  directories:
+    - $HOME/.cache/pip
 
-# command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
-install: pip install -U tox
+matrix:
+  include:
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py26
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py27
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py33
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py34
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py35
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=pypy
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py27
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py26
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=py27
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=pypy
+    - language: generic
+      os: osx
+      osx_image: osx10.11
+      env: TOXENV=py26
+    - language: generic
+      os: osx
+      osx_image: osx10.11
+      env: TOXENV=py27
+    - language: generic
+      os: osx
+      osx_image: xcode7
+      env: TOXENV=docs
 
-# command to run tests, e.g. python setup.py test
-script: tox
+install:
+  - ./.travis/install.sh
+
+script:
+  - ./.travis/run.sh
+
+# after_success:
+#   - ./.travis/upload_coverage.sh
 
 # After you create the Github repo and add it to Travis, run the
 # travis_pypi_setup.py script to finish PyPI deployment setup
