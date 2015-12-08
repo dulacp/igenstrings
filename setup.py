@@ -63,7 +63,7 @@ if sys.argv[-1] == 'publish':
     print("  git push --tags")
     shutil.rmtree('dist')
     shutil.rmtree('build')
-    shutil.rmtree('djangorestframework.egg-info')
+    shutil.rmtree('igenstrings.egg-info')
     sys.exit()
 
 
@@ -76,7 +76,7 @@ setup(
     author="Pierre Dulac",
     author_email='pierre@dulaccc.me',
     packages=get_packages('igenstrings'),
-    package_dir=get_package_data('igenstrings'),
+    package_data=get_package_data('igenstrings'),
     install_requires=requirements,
     include_package_data=True,
     zip_safe=False,

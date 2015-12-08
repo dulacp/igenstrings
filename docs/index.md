@@ -5,8 +5,8 @@
         <img src="https://secure.travis-ci.org/dulaccc/igenstrings.svg?branch=master" class="status-badge">
     </a>
 
-    <a href="https://pypi.python.org/pypi/djangorestframework">
-        <img src="https://img.shields.io/pypi/v/djangorestframework.svg" class="status-badge">
+    <a href="https://pypi.python.org/pypi/igenstrings">
+        <img src="https://img.shields.io/pypi/v/igenstrings.svg" class="status-badge">
     </a>
 </p>
 
