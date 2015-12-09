@@ -41,6 +41,19 @@ Job done for language: ./MyXcodeProjectDir/fr.lproj
 
 By default `git` won't display diff for `.string` files encoded in UTF-16. However, you can [turn on UTF-16 diffs](http://blog.xk72.com/post/31456986659/diff-strings-files-in-git) if you want to.
 
+Create a `.gitattributes` file at your repository root
+
+```ruby
+*.strings diff=localizablestrings
+```
+
+Then edit your `~/.gitconfig` file add add the following :
+
+```ruby
+[diff "localizablestrings"]
+textconv = "iconv -f utf-16 -t utf-8"
+```
+
 ## Known Issues
 
 * genstrings doesn't like path containing spaces, so avoid subfolders containing spaces.
