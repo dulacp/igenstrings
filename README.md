@@ -15,6 +15,12 @@ Documentation is available at [https://igenstrings.readthedocs.org][docs].
 * Merge the results with previous version of the Localizable.string files you may have
 * Inform you if it works correctly
 
+## Installation
+
+```sh
+$ pip install igenstrings
+```
+
 ## Usage
 
 ```sh
