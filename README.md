@@ -37,6 +37,10 @@ Job done for language: ./MyXcodeProjectDir/en.lproj
 Job done for language: ./MyXcodeProjectDir/fr.lproj
 ```
 
+## Hints
+
+By default `git` won't display diff for `.string` files encoded in UTF-16. However, you can [turn on UTF-16 diffs](http://blog.xk72.com/post/31456986659/diff-strings-files-in-git) if you want to.
+
 ## Known Issues
 
 * genstrings doesn't like path containing spaces, so avoid subfolders containing spaces.

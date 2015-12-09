@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-NB: to configure git so that it reads the UTF-16 diffs follow the instructions on this article
-    http://blog.xk72.com/post/31456986659/diff-strings-files-in-git
-"""
-
 from sys import argv
 from codecs import open
 from re import compile
