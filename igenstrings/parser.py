@@ -1,20 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from sys import argv
-from copy import copy
-import os
-import io
 import re
-import shutil
-import optparse
-import logging
-
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-logger.addHandler(logging.StreamHandler())
-
-STRINGS_FILE = 'Localizable.strings'
 
 
 class LocalizedString(object):
@@ -26,57 +12,6 @@ class LocalizedString(object):
 
     def __unicode__(self):
         return u'/*{}*/\n"{}" = "{}";\n'.format(self.comment, self.key, self.value)
-
-
-class LocalizedFile(object):
-
-    def __init__(self, strings=None):
-        """
-        :param: strings a list of `LocalizedString` instances
-        """
-        self.stringset = strings or []
-
-    def read(self, input_filename):
-        with io.open(input_filename, encoding='utf16', mode='r') as f:
-            parser = AppleStringsParser()
-            content = f.read()
-            strings = parser.parse(content)
-            self.stringset = strings
-
-    def save(self, output_filename):
-        if not self.stringset:
-            raise ValueError("Can't saved a file with no strings defined")
-
-        with io.open(output_filename, encoding='utf16', mode='w') as f:
-            # sort by key
-            self.stringset.sort(key=lambda item: item.key)
-            for string in self.stringset:
-                f.write(string.__unicode__())
-
-    def _get_stringsdict(self):
-        """Turns the stringset into a `dict`"""
-        s_dict = {}
-        for s in self.stringset:
-            s_dict[s.key] = s
-        return s_dict
-
-    def merge(self, other):
-        """
-        Merge the current file strings with the given other file strings
-        by taking any other string as the newer version
-
-        :param: other another instance of `LocalizedFile`
-        :return: the merged `LocalizedFile` instance
-        """
-        merged = LocalizedFile()
-        stringsdict = self._get_stringsdict()
-        for new_string in other.stringset:
-            if new_string.key in stringsdict:
-                old_string = copy(stringsdict[new_string.key])
-                old_string.comment = new_string.comment
-                new_string = old_string
-            merged.stringset.append(new_string)
-        return merged
 
 
 class AppleStringsParser(object):
@@ -143,53 +78,3 @@ class AppleStringsParser(object):
             stringset.append(LocalizedString(key, self._unescape(value), comment=comment))
 
         return stringset
-
-
-def merge(merged_fname, old_fname, new_fname):
-    try:
-        old = LocalizedFile()
-        old.read(old_fname)
-        new = LocalizedFile()
-        new.read(new_fname)
-        merged = old.merge(new)
-        merged.save(merged_fname)
-    except Exception as inst:
-        logger.error('Error: input files have invalid format : {}'.format(inst))
-        raise
-
-
-def merge_localized_strings(path, excluded_paths, logging_level=logging.INFO):
-    logger.level = logging_level
-
-    languages = []
-    for root, dirs, files in os.walk(path):
-        logger.debug(dirs)
-        for name in dirs:
-            if name.endswith('.lproj'):
-                languages.append(os.path.join(root, name))
-
-    logger.info("languages found : {}".format(languages))
-
-    for language in languages:
-        original = merged = os.path.join(language, STRINGS_FILE)
-        old = original + '.old'
-        new = original + '.new'
-
-        def rungenstrings():
-            os.system('find %s -name \*.m -or -name \*.mm -not -path "%s" | xargs genstrings -q -o "%s"' % (path, excluded_paths, language))
-
-        if os.path.exists(original):
-            os.rename(original, old)
-            rungenstrings()
-            shutil.copy(original, new)
-
-            # merge
-            merge(merged, old, new)
-            logger.info("Job done for language: %s" % language)
-        else:
-            rungenstrings()
-
-        if os.path.exists(old):
-            os.remove(old)
-        if os.path.exists(new):
-            os.remove(new)

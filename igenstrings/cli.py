@@ -4,7 +4,7 @@ import logging
 
 import click
 
-from .parser import merge_localized_strings
+from .merger import merge_localized_strings
 
 
 @click.command()
