@@ -75,7 +75,7 @@ Tools used in rendering this package:
 [pypi-version-image]: https://img.shields.io/pypi/v/igenstrings.svg
 [pypi]: https://pypi.python.org/pypi/igenstrings
 [docs-image]: https://readthedocs.org/projects/igenstrings/badge/?version=latest
-[docs]: https://readthedocs.org/projects/igenstrings/?version=latest
+[docs]: http://igenstrings.readthedocs.org/en/latest/
 
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
 [cookiecutter-pypackage]: https://github.com/audreyr/cookiecutter-pypackage
