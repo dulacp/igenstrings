@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from sys import argv
-from codecs import open
 from re import compile
 from copy import copy
 import os
+import io
 import shutil
 import optparse
 import logging
@@ -29,93 +29,67 @@ class LocalizedString(object):
         self.key, self.value = re_translation.match(self.translation).groups()
 
     def __unicode__(self):
-        return "{}{}\n".format("".join(self.comments), self.translation)
+        return u"{}{}\n".format("".join(self.comments), self.translation)
 
 
 class LocalizedFile(object):
 
-    def __init__(self, fname=None, auto_read=False):
-        self.fname = fname
-        self.reset()
-
-        if auto_read:
-            self.read_from_file(fname)
-
-    def reset(self):
+    def __init__(self, filename=None):
         self.strings = []
         self.strings_d = {}
 
-    def read_from_file(self, fname=None):
-        self.reset()
+        if filename:
+            self.filename = filename
+            self.read()
 
-        fname = self.fname if fname == None else fname
-        try:
-            f = open(fname, encoding='utf16', mode='r')
-        except:
-            logger.error("File {} does not exist.".format(fname))
-            exit(-1)
-
-        try:
+    def read(self):
+        with io.open(self.filename, encoding='utf16', mode='r') as f:
             line = f.readline()
             logger.debug(line)
-        except:
-            logger.error("Can't read line for file: {}".format(fname))
-            raise
 
-        i = 1
-        while line:
-            comments = [line]
+            i = 1
+            while line:
+                comments = [line]
 
-            if not re_comment_single.match(line):
-                while line and not re_comment_end.match(line):
-                    line = f.readline()
-                    comments.append(line)
+                if not re_comment_single.match(line):
+                    while line and not re_comment_end.match(line):
+                        line = f.readline()
+                        comments.append(line)
 
-            line = f.readline()
-            i += 1
-
-            # handle multi lines
-            while len(line) > 1 and line[-2] != u';':
-                nextline = f.readline()
-                if not nextline:
-                    nextline = '\n'
-                line += nextline
-                i += 1
-
-            logger.debug("%d %s" % (i, line.rstrip('\n')))
-            if line and re_translation.match(line):
-                translation = line
-            else:
-                logger.error("Line {} of file '{}' raising the exception: {}".format(i, self.fname, line))
-                raise Exception('invalid file')
-
-            line = f.readline()
-            i += 1
-            while line and line == u'\n':
                 line = f.readline()
                 i += 1
 
-            string = LocalizedString(comments, translation)
-            self.strings.append(string)
-            self.strings_d[string.key] = string
+                # handle multi lines
+                while len(line) > 1 and line[-2] != u';':
+                    nextline = f.readline()
+                    if not nextline:
+                        nextline = '\n'
+                    line += nextline
+                    i += 1
 
-        f.close()
+                logger.debug("%d %s" % (i, line.rstrip('\n')))
+                if line and re_translation.match(line):
+                    translation = line
+                else:
+                    logger.error("Line {} of file '{}' raising the exception: {}".format(i, self.filename, line))
+                    raise ValueError('invalid file')
 
-    def save_to_file(self, fname=None):
-        fname = self.fname if fname == None else fname
-        try:
-            f = open(fname, encoding='utf16', mode='w')
-        except:
-            print("Couldn't open file {}.".format(fname))
-            exit(-1)
+                line = f.readline()
+                i += 1
+                while line and line == u'\n':
+                    line = f.readline()
+                    i += 1
 
-        # sort by key
-        self.strings.sort(key=lambda item: item.key)
+                string = LocalizedString(comments, translation)
+                self.strings.append(string)
+                self.strings_d[string.key] = string
 
-        for string in self.strings:
-            f.write(string.__unicode__())
-
-        f.close()
+    def save(self, output_filename):
+        with io.open(output_filename, encoding='utf16', mode='w') as f:
+            # sort by key
+            self.strings.sort(key=lambda item: item.key)
+            for string in self.strings:
+                f.write(string.__unicode__())
 
     def merge_with(self, new):
         merged = LocalizedFile()
@@ -140,10 +114,10 @@ class LocalizedFile(object):
 
 def merge(merged_fname, old_fname, new_fname):
     try:
-        old = LocalizedFile(old_fname, auto_read=True)
-        new = LocalizedFile(new_fname, auto_read=True)
+        old = LocalizedFile(old_fname)
+        new = LocalizedFile(new_fname)
         merged = old.merge_with(new)
-        merged.save_to_file(merged_fname)
+        merged.save(merged_fname)
     except Exception as inst:
         logger.error('Error: input files have invalid format : {}'.format(inst))
         raise

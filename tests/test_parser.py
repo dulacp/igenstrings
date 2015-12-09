@@ -14,7 +14,7 @@ from codecs import open
 from igenstrings import parser
 
 
-class TestIgenstrings(unittest.TestCase):
+class TestParserIntegration(unittest.TestCase):
 
     def setUp(self):
         pass
