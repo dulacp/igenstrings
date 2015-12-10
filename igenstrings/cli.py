@@ -4,7 +4,7 @@ import logging
 
 import click
 
-from .merger import merge_localized_strings
+from .merger import Merger
 
 
 @click.command()
@@ -32,4 +32,6 @@ def main(path, debug, excluded_path):
     if logging_level == logging.DEBUG:
         click.echo(click.style('Debug mode is on', fg='red'))
 
-    merge_localized_strings(path, excluded_path, logging_level=logging_level)
+    merger = Merger(path, excluded_path, logging_level=logging_level)
+    merger.merge_localized_strings()
+    click.echo(click.style('Done', fg='green'))
