@@ -3,8 +3,17 @@
 
 import pytest
 from click.testing import CliRunner
+from py import path
 
 from igenstrings import cli
+
+
+@pytest.fixture(autouse=True)
+def initdir(tmpdir):
+    fixture_basename = 'tests/objc'
+    fixture_path = path.local(fixture_basename)
+    fixture_path.copy(tmpdir / fixture_basename)
+    tmpdir.chdir()  # change to pytest-provided temporary directory
 
 
 @pytest.fixture
