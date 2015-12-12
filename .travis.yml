@@ -56,5 +56,5 @@ install:
 script:
   - ./.travis/run.sh
 
-# after_success:
-#   - ./.travis/upload_coverage.sh
+after_success:
+  - ./.travis/upload_coverage.sh
