@@ -89,7 +89,7 @@ Tools used in rendering this package:
 
 
 [build-status-image]: https://img.shields.io/travis/dulaccc/igenstrings.svg
-[build-coverage-image]: https://codecov.io/github/dulaccc/igenstrings/coverage.svg?branch=master
+[build-coverage-image]: https://img.shields.io/codecov/c/github/codecov/igenstrings.svg
 [travis]: https://travis-ci.org/dulaccc/igenstrings
 [codecov]: https://codecov.io/github/dulaccc/igenstrings?branch=master
 [pypi-version-image]: https://img.shields.io/pypi/v/igenstrings.svg
