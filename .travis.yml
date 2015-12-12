@@ -32,10 +32,6 @@ matrix:
     - language: generic
       os: osx
       osx_image: xcode7
-      env: TOXENV=py27
-    - language: generic
-      os: osx
-      osx_image: xcode7
       env: TOXENV=py33
     - language: generic
       os: osx
