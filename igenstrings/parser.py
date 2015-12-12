@@ -10,9 +10,6 @@ class LocalizedString(object):
         self.value = value
         self.comment = comment
 
-    def __unicode__(self):
-        return u'/*{}*/\n"{}" = "{}";\n'.format(self.comment, self.key, self.value)
-
 
 class AppleStringsParser(object):
     """
@@ -23,6 +20,13 @@ class AppleStringsParser(object):
 
     NB: Apple strings files *must* be encoded in UTF-16 encoding.
     """
+
+    @classmethod
+    def format_string(cls, s):
+        """
+        Format a `LocalizedString` instance
+        """
+        return u'/*{}*/\n"{}" = "{}";\n'.format(s.comment, s.key, s.value)
 
     def _escape(self, s):
         return s.replace('"', '\\"').replace('\n', r'\n').replace('\r', r'\r')

@@ -28,8 +28,8 @@ class LocalizedFile(object):
         with io.open(output_filename, encoding='utf16', mode='w') as f:
             # sort by key
             self.stringset.sort(key=lambda item: item.key)
-            for string in self.stringset:
-                f.write(string.__unicode__())
+            formatted_strings = '\n'.join(AppleStringsParser.format_string(s) for s in self.stringset)
+            f.write(formatted_strings)
 
     def _get_stringsdict(self):
         """Turns the stringset into a `dict`"""
