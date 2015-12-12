@@ -9,6 +9,7 @@
 @interface IGSimpleObject ()
 
 @property (nonatomic, strong, readwrite) NSString *title;
+@property (nonatomic, strong, readwrite) NSString *subtitle;
 
 @end
 
@@ -16,6 +17,7 @@
 
 - (void)configureWithName:(NSString *)name {
     self.title = [NSString stringWithFormat:NSLocalizedString(@"Hi %@ !", @"title for the simple object"), name];
+    self.subtitle = NSLocalizedString(@"How are you doing today", @"subtitle for the simple object");
 }
 
 @end

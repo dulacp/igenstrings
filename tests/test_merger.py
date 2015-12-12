@@ -53,3 +53,11 @@ class TestMergerIntegration(unittest.TestCase):
         with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
             content = fr_locale_file.read()
         self.assertIn('Bonjour', content)
+
+    def test_merge_new_translated_strings(self):
+        merger = Merger('tests/objc/existing', None)
+        merger.merge_localized_strings()
+        content = None
+        with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
+            content = fr_locale_file.read()
+        self.assertIn('How are you doing', content)
