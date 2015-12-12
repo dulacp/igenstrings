@@ -1,6 +1,7 @@
 # igenstrings
 
 [![build-status-image]][travis]
+[![build-coverage-image]][codecov]
 [![pypi-version-image]][pypi]
 [![docs-image]][docs]
 
@@ -88,7 +89,9 @@ Tools used in rendering this package:
 
 
 [build-status-image]: https://img.shields.io/travis/dulaccc/igenstrings.svg
+[build-coverage-image]: https://codecov.io/github/dulaccc/igenstrings/coverage.svg?branch=master
 [travis]: https://travis-ci.org/dulaccc/igenstrings
+[codecov]: https://codecov.io/github/dulaccc/igenstrings?branch=master
 [pypi-version-image]: https://img.shields.io/pypi/v/igenstrings.svg
 [pypi]: https://pypi.python.org/pypi/igenstrings
 [docs-image]: https://readthedocs.org/projects/igenstrings/badge/?version=latest
