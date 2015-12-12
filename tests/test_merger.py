@@ -55,3 +55,17 @@ def test_merge_new_translated_strings():
     with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
         content = fr_locale_file.read()
     assert 'How are you doing' in content
+
+
+def test_linebreak_between_strings():
+    merger = Merger('tests/objc/existing', None)
+    merger.merge_localized_strings()
+    content = None
+    with open('tests/objc/existing/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+        content = en_locale_file.read()
+    assert content == """/* title for the simple object */
+"Hi %@ !" = "Hi %@ !";
+
+/* subtitle for the simple object */
+"How are you doing today" = "How are you doing today";
+"""
