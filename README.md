@@ -57,8 +57,8 @@ textconv = "iconv -f utf-16 -t utf-8"
 
 ## Known Issues
 
-* genstrings doesn't like path containing spaces, so avoid subfolders containing spaces.
-  Otherwise the Localizable.string will not be complete
+* The Apple `genstrings` command doesn't like path that contains spaces.
+  So avoid subfolders containing spaces, otherwise the Localizable.string will not be complete
 * You need to respect the format used by the genstrings command unless it will breaks.
   So, to avoid issues use strictly the format below for each translated text.
   Also do not remove the line break between two fields or it will breaks too.
