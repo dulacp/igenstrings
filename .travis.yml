@@ -53,4 +53,4 @@ script:
   - ./.travis/run.sh
 
 after_success:
-  - ./.travis/upload_coverage.sh
+  - ./.travis/update_coverage.sh
