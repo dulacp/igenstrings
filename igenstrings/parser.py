@@ -74,8 +74,7 @@ class AppleStringsParser(object):
             while end < start:
                 m = c.match(f, end, start) or ws.match(f, end, start)
                 if not m or m.start() != end:
-                    raise StringsParseError("Invalid syntax: %s" %\
-                            f[end:start])
+                    raise ValueError("Invalid syntax: %s" % f[end:start])
                 end = m.end()
             end = end_
             key = self._unescape_key(key)
