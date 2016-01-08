@@ -61,14 +61,8 @@ coverage:
 docs:
 	mkdocs build
 
-release: clean
-	python setup.py sdist upload
-	python setup.py bdist_wheel upload
-
-dist: clean
-	python setup.py sdist
-	python setup.py bdist_wheel
-	ls -l dist
+publish: clean
+	python setup.py publish
 
 install: clean
-	python setup.py install
+	python setup.py develop
