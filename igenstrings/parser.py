@@ -45,10 +45,7 @@ class AppleStringsParser(object):
         stringset = []
 
         f = content
-        prefix = ""
-        if f.startswith(u'\ufeff'):
-            prefix = u'\ufeff'
-            f = f.lstrip(u'\ufeff')
+        f = f.lstrip(u'\ufeff')  # in case the file contains this Big/Little edian char
 
         #regex for finding all comments in a file
         cp = r'(?:/\*(?P<comment>(?:[^*]|(?:\*+[^*/]))*\**)\*/)'
