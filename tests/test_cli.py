@@ -26,6 +26,7 @@ def test_cli(runner):
     assert result.exit_code == 0
     assert not result.exception
     assert result.output.strip().startswith('Running the script')
+    assert 'Excluded path regex' not in result.output
 
 
 def test_cli_with_debug(runner):
@@ -35,8 +36,8 @@ def test_cli_with_debug(runner):
     assert 'Debug mode is on' in result.output
 
 
-# def test_cli_with_excluded_paths(runner):
-#     result = runner.invoke(cli.main, ['--excluded-path tests/objc/existing', 'tests/objc/existing'])
-#     assert result.exit_code == 0
-#     assert not result.exception
-#     assert result.output.strip() == 'Hello, {{ cookiecutter.full_name.split()[0] }}.'
+def test_cli_with_excluded_paths(runner):
+    result = runner.invoke(cli.main, ['--excluded-path', 'tests/objc/exclusion/ExcludedDirectory/*.m', 'tests/objc/exclusion'])
+    assert result.exit_code == 0
+    assert not result.exception
+    assert 'Excluded path regex' in result.output
