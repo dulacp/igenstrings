@@ -49,15 +49,13 @@ lint:
 	flake8 igenstrings tests
 
 test:
-	python setup.py test
+	py.test
 
 test-all:
 	tox
 
 coverage:
-	coverage run --source igenstrings setup.py test
-	coverage report -m
-	coverage html
+	py.test --cov igenstrings --cov-report html
 	$(BROWSER) htmlcov/index.html
 
 docs:
