@@ -28,9 +28,6 @@ class AppleStringsParser(object):
         """
         return u'/*{}*/\n"{}" = "{}";\n'.format(s.comment, s.key, s.value)
 
-    def _escape(self, s):
-        return s.replace('"', '\\"').replace('\n', r'\n').replace('\r', r'\r')
-
     def _unescape_key(self, s):
         return s.replace('\\\n', '')
 
