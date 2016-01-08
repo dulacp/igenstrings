@@ -22,9 +22,6 @@ class LocalizedFile(object):
             self.stringset = strings
 
     def save(self, output_filename):
-        if not self.stringset:
-            raise ValueError("Can't saved a file with no strings defined")
-
         with io.open(output_filename, encoding='utf16', mode='w') as f:
             # sort by key
             self.stringset.sort(key=lambda item: item.key)
