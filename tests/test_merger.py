@@ -69,3 +69,10 @@ def test_linebreak_between_strings():
 /* subtitle for the simple object */
 "How are you doing today" = "How are you doing today";
 """
+
+
+def test_cannot_parse_malformatted_strings():
+    merger = Merger('tests/objc/malformatted', None)
+    with pytest.raises(Exception) as excinfo:
+        merger.merge_localized_strings()
+    assert isinstance(excinfo.value, ValueError)
