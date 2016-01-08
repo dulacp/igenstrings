@@ -25,13 +25,13 @@ def main(path, debug, excluded_path):
     if path:
         path = realpath(path)
     if excluded_path:
-        excluded_path = realpath(excluded_path)
+        excluded_paths = [realpath(excluded_path)]
 
     click.echo(click.style('Running the script on path {}'.format(path), fg='green'))
-    click.echo(click.style('Excluded path regex: {}'.format(excluded_path), fg='red'))
+    click.echo(click.style('Excluded path regex: {}'.format(excluded_paths), fg='red'))
     if logging_level == logging.DEBUG:
         click.echo(click.style('Debug mode is on', fg='red'))
 
-    merger = Merger(path, excluded_path, logging_level=logging_level)
+    merger = Merger(path, excluded_paths, logging_level=logging_level)
     merger.merge_localized_strings()
     click.echo(click.style('Done', fg='green'))

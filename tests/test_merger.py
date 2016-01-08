@@ -76,3 +76,11 @@ def test_cannot_parse_malformatted_strings():
     with pytest.raises(Exception) as excinfo:
         merger.merge_localized_strings()
     assert isinstance(excinfo.value, ValueError)
+
+
+def test_excluded_path():
+    merger = Merger('tests/objc/exclusion', ['tests/objc/exclusion/ExcludedDirectory/*.m'])
+    merger.merge_localized_strings()
+    with open('tests/objc/exclusion/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+        content = en_locale_file.read()
+    assert 'Should be excluded from localization' not in content

@@ -40,10 +40,15 @@ class Merger(object):
         return languages
 
     def _run_genstrings(self, lang):
-        os.system('find {} -name \*.m -or -name \*.mm -not -path "{}" | xargs genstrings -q -o "{}"'.format(
+        if self.excluded_paths:
+            exclusion_options = ' '.join('-not -path "{}"'.format(excl_path) for excl_path in self.excluded_paths)
+        else:
+            exclusion_options = ''
+        cmd = 'find {} {} -name \*.m -or -name \*.mm | xargs genstrings -q -o "{}"'.format(
             self.path,
-            self.excluded_paths,
-            lang))
+            exclusion_options,
+            lang)
+        os.system(cmd)
 
     def _merge_locale(self, lang):
         final_filename = os.path.join(lang, STRINGS_FILE)
