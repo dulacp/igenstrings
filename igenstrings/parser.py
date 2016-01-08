@@ -49,7 +49,7 @@ class AppleStringsParser(object):
 
         #regex for finding all comments in a file
         cp = r'(?:/\*(?P<comment>(?:[^*]|(?:\*+[^*/]))*\**)\*/)'
-        p = re.compile(r'(?:%s[ \t]*[\n]|[\r\n]|[\r]){0,1}(?P<line>(("(?P<key>[^"\\]*(?:\\.[^"\\]*)*)")|(?P<property>\w+))\s*=\s*"(?P<value>[^"\\]*(?:\\.[^"\\]*)*)"\s*;)'%cp, re.DOTALL|re.U)
+        p = re.compile(r'(?:%s[ \t]*[\n]|[\r\n]|[\r]){0,1}(?P<line>("(?P<key>[^"\\]*(?:\\.[^"\\]*)*)")\s*=\s*"(?P<value>[^"\\]*(?:\\.[^"\\]*)*)"\s*;)'%cp, re.DOTALL|re.U)
         #c = re.compile(r'\s*/\*(.|\s)*?\*/\s*', re.U)
         c = re.compile(r'//[^\n]*\n|/\*(?:.|[\r\n])*?\*/', re.U)
         ws = re.compile(r'\s+', re.U)
@@ -62,8 +62,6 @@ class AppleStringsParser(object):
             line = i.group('line')
             key = i.group('key')
             comment = i.group('comment') or ''
-            if not key:
-                key = i.group('property')
             value = i.group('value')
             while end < start:
                 m = c.match(f, end, start) or ws.match(f, end, start)
