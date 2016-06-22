@@ -71,6 +71,17 @@ def test_linebreak_between_strings():
 """
 
 
+def test_escape_double_quotes():
+    merger = Merger('tests/objc/doublequotes', None)
+    merger.merge_localized_strings()
+    content = None
+    with open('tests/objc/doublequotes/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+        content = en_locale_file.read()
+    assert content == """/* title for the simple object */
+"Hi \"%@\" !" = "Hi \"%@\" !";
+"""
+
+
 def test_cannot_parse_malformatted_strings():
     merger = Merger('tests/objc/malformatted', None)
     with pytest.raises(Exception) as excinfo:
