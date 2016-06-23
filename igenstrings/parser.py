@@ -33,7 +33,7 @@ class AppleStringsParser(object):
 
     def _unescape(self, s):
         s = s.replace('\\\n', '')
-        return s.replace('\\"', '"').replace(r'\n', '\n').replace(r'\r', '\r')
+        return s.replace(r'\n', '\n').replace(r'\r', '\r')
 
     def parse(self, content):
         """

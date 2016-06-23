@@ -9,7 +9,6 @@
 @interface IGSimpleObject : NSObject
 
 @property (nonatomic, strong, readonly) NSString *title;
-@property (nonatomic, strong, readonly) NSString *subtitle;
 
 - (void)configureWithName:(NSString *)name;
 

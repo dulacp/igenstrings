@@ -78,7 +78,7 @@ def test_escape_double_quotes():
     with open('tests/objc/doublequotes/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert content == """/* title for the simple object */
-"Hi \"%@\" !" = "Hi \"%@\" !";
+"Hi \\"%@\\" !" = "Hi \\"%@\\" !";
 """
 
 
