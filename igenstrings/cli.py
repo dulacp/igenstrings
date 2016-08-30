@@ -4,10 +4,12 @@ import logging
 
 import click
 
+from . import __version__
 from .merger import Merger
 
 
 @click.command()
+@click.version_option(version=__version__)
 @click.argument('path',
     type=click.Path(exists=True))
 @click.option('--debug',
