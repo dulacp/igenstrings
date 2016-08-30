@@ -2,4 +2,4 @@
 
 __author__ = 'Pierre Dulac'
 __email__ = 'pierre@dulaccc.me'
-__version__ = '1.0.2'
+__version__ = '1.0.3'
