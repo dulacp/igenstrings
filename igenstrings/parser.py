@@ -33,7 +33,7 @@ class AppleStringsParser(object):
 
     def _unescape(self, s):
         s = s.replace('\\\n', '')
-        return s.replace(r'\n', '\n').replace(r'\r', '\r')
+        return s.replace(r'\r', '\r')
 
     def parse(self, content):
         """
@@ -70,6 +70,7 @@ class AppleStringsParser(object):
                 end = m.end()
             end = end_
             key = self._unescape_key(key)
-            stringset.append(LocalizedString(key, self._unescape(value), comment=comment))
+            value = self._unescape(value)
+            stringset.append(LocalizedString(key, value, comment=comment))
 
         return stringset
