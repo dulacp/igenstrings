@@ -57,7 +57,7 @@ def test_merge_new_translated_strings():
     assert 'How are you doing' in content
 
 
-def test_linebreak_between_strings():
+def test_linespace_between_strings():
     merger = Merger('tests/objc/existing', None)
     merger.merge_localized_strings()
     content = None
@@ -79,6 +79,17 @@ def test_escape_double_quotes():
         content = en_locale_file.read()
     assert content == """/* title for the simple object */
 "Hi \\"%@\\" !" = "Hi \\"%@\\" !";
+"""
+
+
+def test_escape_linebreaks():
+    merger = Merger('tests/objc/linebreaks', None)
+    merger.merge_localized_strings()
+    content = None
+    with open('tests/objc/linebreaks/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+        content = en_locale_file.read()
+    assert content == """/* title for the simple object */
+"Hello \\nworld!" = "Hello \\nworld!";
 """
 
 
