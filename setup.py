@@ -9,8 +9,8 @@ from setuptools import setup
 
 
 requirements = [
-    'click',
-    'chardet'
+    'click==6.6',
+    'chardet==2.3.0'
 ]
 
 
