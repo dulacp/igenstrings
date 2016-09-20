@@ -10,6 +10,7 @@ from setuptools import setup
 
 requirements = [
     'click',
+    'chardet'
 ]
 
 
