@@ -94,14 +94,11 @@ class Merger(object):
         if encoding is None:
             logger.warn("No encoding found for your file '{}'. You should use UTF-8 encoding as recommended by Apple.")
             encoding = 'utf-8'  # fallback
-        # if encoding.lower().startswith('utf-8'):
-        #     # python isn't happy with exotic encodings (like utf-8-sig), we just use plain utf-8
-        #     encoding = 'utf-8'
-        if encoding.startswith('utf-16'):
+        if encoding.lower().startswith('utf-16'):
             raise ValueError("igenstrings now only supports UTF-8 encoded files how recommended by Apple. "
                              "We found your file to be encoded with `{}`. "
                              "Please convert your file to proceed, with iconv for instance".format(encoding))
-        if not encoding.startswith('utf-8'):
+        if not encoding.lower().startswith('utf-8'):
             logger.warn("It's recommended to encode your file '{}' with the UTF-8 encoding, "
                         "instead we found '{}', behavior is unexpected".format(final_filename, encoding))
 

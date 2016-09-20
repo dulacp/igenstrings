@@ -124,3 +124,10 @@ def test_works_with_ascii_encoding():
     with open('tests/objc/ascii/fr.lproj/Localizable.strings', encoding='utf8', mode='r') as fr_locale_file:
         content = fr_locale_file.read()
     assert 'Bonjour' in content
+
+
+def test_raise_error_with_utf16_encoding():
+    merger = Merger('tests/objc/utf16', None)
+    with pytest.raises(Exception) as excinfo:
+        merger.merge_localized_strings()
+    assert isinstance(excinfo.value, ValueError)
