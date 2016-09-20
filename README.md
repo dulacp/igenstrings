@@ -23,6 +23,12 @@ Documentation is available at [https://igenstrings.readthedocs.org][docs].
 $ pip install igenstrings
 ```
 
+## Requirements
+
+Ensure your `*.strings` files are UTF-8 encoded as [Apple recommends it](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html) now :
+
+> It is recommended that you save strings files using the UTF-8 encoding, which is the default encoding for standard strings files. Xcode automatically transcodes strings files from UTF-8 to UTF-16 when they’re copied into the product.
+
 ## Usage
 
 ```sh
