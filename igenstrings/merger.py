@@ -95,9 +95,10 @@ class Merger(object):
             logger.warn("No encoding found for your file '{}'. You should use UTF-8 encoding as recommended by Apple.")
             encoding = 'utf-8'  # fallback
         if encoding.lower().startswith('utf-16'):
-            raise ValueError("igenstrings now only supports UTF-8 encoded files how recommended by Apple. "
-                             "We found your file to be encoded with `{}`. "
-                             "Please convert your file to proceed, with iconv for instance".format(encoding))
+            raise ValueError("igenstrings now only supports UTF-8 encoded files, as recommended by Apple. "
+                             "We found that your file is `{}` encoded. "
+                             "Please convert your file to proceed, like with this command: "
+                             "`$ iconv -f {} -t utf-8 {}`".format(encoding, encoding.lower(), final_filename))
         if not encoding.lower().startswith('utf-8'):
             logger.warn("It's recommended to encode your file '{}' with the UTF-8 encoding, "
                         "instead we found '{}', behavior is unexpected".format(final_filename, encoding))
