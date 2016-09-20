@@ -1,2 +1,2 @@
 /* title for the simple object */
-"Hi \"%@\" !" = "Hi \"%@\" !";
+"Hi %@ !" = "Bonjour %@ !";

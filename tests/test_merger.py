@@ -34,7 +34,7 @@ def test_create_localizable_strings():
     assert os.path.exists('tests/objc/new/en.lproj/Localizable.strings')
     assert os.path.exists('tests/objc/new/fr.lproj/Localizable.strings')
     content = None
-    with open('tests/objc/new/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+    with open('tests/objc/new/en.lproj/Localizable.strings', encoding='utf8', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert 'Hi' in content
 
@@ -43,7 +43,7 @@ def test_keep_existing_translated_strings():
     merger = Merger('tests/objc/existing', None)
     merger.merge_localized_strings()
     content = None
-    with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
+    with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf8', mode='r') as fr_locale_file:
         content = fr_locale_file.read()
     assert 'Bonjour' in content
 
@@ -52,7 +52,7 @@ def test_merge_new_translated_strings():
     merger = Merger('tests/objc/existing', None)
     merger.merge_localized_strings()
     content = None
-    with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf16', mode='r') as fr_locale_file:
+    with open('tests/objc/existing/fr.lproj/Localizable.strings', encoding='utf8', mode='r') as fr_locale_file:
         content = fr_locale_file.read()
     assert 'How are you doing' in content
 
@@ -61,7 +61,7 @@ def test_linespace_between_strings():
     merger = Merger('tests/objc/existing', None)
     merger.merge_localized_strings()
     content = None
-    with open('tests/objc/existing/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+    with open('tests/objc/existing/en.lproj/Localizable.strings', encoding='utf8', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert content == """/* title for the simple object */
 "Hi %@ !" = "Hi %@ !";
@@ -75,7 +75,7 @@ def test_escape_double_quotes():
     merger = Merger('tests/objc/doublequotes', None)
     merger.merge_localized_strings()
     content = None
-    with open('tests/objc/doublequotes/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+    with open('tests/objc/doublequotes/en.lproj/Localizable.strings', encoding='utf8', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert content == """/* title for the simple object */
 "Hi \\"%@\\" !" = "Hi \\"%@\\" !";
@@ -86,7 +86,7 @@ def test_escape_linebreaks():
     merger = Merger('tests/objc/linebreaks', None)
     merger.merge_localized_strings()
     content = None
-    with open('tests/objc/linebreaks/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+    with open('tests/objc/linebreaks/en.lproj/Localizable.strings', encoding='utf8', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert content == """/* title for the simple object */
 "Hello \\nworld!" = "Hello \\nworld!";
@@ -103,6 +103,24 @@ def test_cannot_parse_malformatted_strings():
 def test_excluded_path():
     merger = Merger('tests/objc/exclusion', ['tests/objc/exclusion/ExcludedDirectory/*.m'])
     merger.merge_localized_strings()
-    with open('tests/objc/exclusion/en.lproj/Localizable.strings', encoding='utf16', mode='r') as en_locale_file:
+    with open('tests/objc/exclusion/en.lproj/Localizable.strings', encoding='utf8', mode='r') as en_locale_file:
         content = en_locale_file.read()
     assert 'Should be excluded from localization' not in content
+
+
+def test_works_with_utf8_encoding():
+    merger = Merger('tests/objc/utf8', None)
+    merger.merge_localized_strings()
+    content = None
+    with open('tests/objc/utf8/fr.lproj/Localizable.strings', encoding='utf8', mode='r') as fr_locale_file:
+        content = fr_locale_file.read()
+    assert 'Bonjour' in content
+
+
+def test_works_with_ascii_encoding():
+    merger = Merger('tests/objc/ascii', None)
+    merger.merge_localized_strings()
+    content = None
+    with open('tests/objc/ascii/fr.lproj/Localizable.strings', encoding='utf8', mode='r') as fr_locale_file:
+        content = fr_locale_file.read()
+    assert 'Bonjour' in content

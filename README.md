@@ -12,7 +12,8 @@ Documentation is available at [https://igenstrings.readthedocs.org][docs].
 
 ## Features
 
-* Takes care of runing the genstrings command on all files \*.m
+* Ensure your files are encoded in UTF-8 (as [recommended by Apple](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html) now)
+* Takes care of runing the genstrings command on all files `\*.m`, `\*.mm` and `\*.swift`
 * Merge the results with previous version of the Localizable.string files you may have
 * Inform you if it works correctly
 
@@ -36,23 +37,6 @@ Excluded path regex: None
 languages found : ['./MyXcodeProjectDir/en.lproj', './MyXcodeProjectDir/fr.lproj']
 Job done for language: ./MyXcodeProjectDir/en.lproj
 Job done for language: ./MyXcodeProjectDir/fr.lproj
-```
-
-## Hints
-
-By default `git` won't display diff for `.string` files encoded in UTF-16. However, you can [turn on UTF-16 diffs](http://blog.xk72.com/post/31456986659/diff-strings-files-in-git) if you want to.
-
-Create a `.gitattributes` file at your repository root
-
-```ruby
-*.strings diff=localizablestrings
-```
-
-Then edit your `~/.gitconfig` file add add the following :
-
-```ruby
-[diff "localizablestrings"]
-textconv = "iconv -f utf-16 -t utf-8"
 ```
 
 ## Known Issues

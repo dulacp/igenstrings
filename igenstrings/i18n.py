@@ -14,15 +14,15 @@ class LocalizedFile(object):
         """
         self.stringset = strings or []
 
-    def read(self, input_filename):
-        with io.open(input_filename, encoding='utf16', mode='r') as f:
+    def read(self, input_filename, encoding='utf8'):
+        with io.open(input_filename, encoding=encoding, mode='r') as f:
             parser = AppleStringsParser()
             content = f.read()
             strings = parser.parse(content)
             self.stringset = strings
 
-    def save(self, output_filename):
-        with io.open(output_filename, encoding='utf16', mode='w') as f:
+    def save(self, output_filename, encoding='utf8'):
+        with io.open(output_filename, encoding=encoding, mode='w') as f:
             # sort by key
             self.stringset.sort(key=lambda item: item.key)
             formatted_strings = '\n'.join(AppleStringsParser.format_string(s) for s in self.stringset)
