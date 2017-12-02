@@ -23,6 +23,11 @@ Documentation is available at [https://igenstrings.readthedocs.org][docs].
 $ pip install igenstrings
 ```
 
+## Support
+
+Python 2.7
+Python 3.4+
+
 ## Requirements
 
 Ensure your `*.strings` files are UTF-8 encoded as [Apple recommends it](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html) now :

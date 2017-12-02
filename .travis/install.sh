@@ -21,10 +21,6 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py --user
             ;;
-        py33)
-            pyenv install 3.3.6
-            pyenv global 3.3.6
-            ;;
         py34)
             pyenv install 3.4.2
             pyenv global 3.4.2
@@ -32,6 +28,10 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
         py35)
             pyenv install 3.5.0
             pyenv global 3.5.0
+            ;;
+        py36)
+            pyenv install 3.6.3
+            pyenv global 3.6.3
             ;;
         pypy)
             pyenv install pypy-4.0.1
