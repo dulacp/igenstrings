@@ -70,18 +70,18 @@ Tools used in rendering this package:
 
 ## Contact
 
-[Pierre Dulac][github-dulaccc]  
-[@dulaccc][twitter-dulaccc]
+[Pierre Dulac][github-dulacp]  
+[@\_dulacp][twitter-dulacp]
 
 ## License
 
 `igenstrings` is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
 
 
-[build-status-image]: https://img.shields.io/travis/dulaccc/igenstrings.svg
-[build-coverage-image]: https://img.shields.io/codecov/c/github/dulaccc/igenstrings.svg
-[travis]: https://travis-ci.org/dulaccc/igenstrings
-[codecov]: https://codecov.io/github/dulaccc/igenstrings?branch=master
+[build-status-image]: https://img.shields.io/travis/dulacp/igenstrings.svg
+[build-coverage-image]: https://img.shields.io/codecov/c/github/dulacp/igenstrings.svg
+[travis]: https://travis-ci.org/dulacp/igenstrings
+[codecov]: https://codecov.io/github/dulacp/igenstrings?branch=master
 [pypi-version-image]: https://img.shields.io/pypi/v/igenstrings.svg
 [pypi]: https://pypi.python.org/pypi/igenstrings
 [docs-image]: https://readthedocs.org/projects/igenstrings/badge/?version=latest
@@ -89,5 +89,5 @@ Tools used in rendering this package:
 
 [Cookiecutter]: https://github.com/audreyr/cookiecutter
 [cookiecutter-pypackage]: https://github.com/audreyr/cookiecutter-pypackage
-[github-dulaccc]: https://github.com/dulaccc
-[twitter-dulaccc]: https://twitter.com/dulaccc
+[github-dulacp]: https://github.com/dulacp
+[twitter-dulacp]: https://twitter.com/_dulacp

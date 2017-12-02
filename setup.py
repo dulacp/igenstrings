@@ -71,11 +71,11 @@ if sys.argv[-1] == 'publish':
 setup(
     name='igenstrings',
     version=version,
-    url='https://github.com/dulaccc/igenstrings',
+    url='https://github.com/dulacp/igenstrings',
     license="MIT",
     description="Enhance the genstrings command by adding merging capabilities",
     author="Pierre Dulac",
-    author_email='pierre@dulaccc.me',
+    author_email='dulacpi@gmail.com',
     packages=get_packages('igenstrings'),
     package_data=get_package_data('igenstrings'),
     install_requires=requirements,

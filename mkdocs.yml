@@ -2,7 +2,7 @@ site_name: igenstrings
 site_url: https://readthedocs.org/projects/igenstrings/?version=latest
 site_description: Enhance the genstrings command by adding merging capabilities
 
-repo_url: https://github.com/dulaccc/igenstrings
+repo_url: https://github.com/dulacp/igenstrings
 
 theme: readthedocs
 
