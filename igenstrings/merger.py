@@ -66,7 +66,7 @@ class Merger(object):
             exclusion_options = ' '.join('-not -path "{}"'.format(excl_path) for excl_path in self.excluded_paths)
         else:
             exclusion_options = ''
-        cmd = 'find {} {} -name \*.m -or -name \*.mm -or -name \*.swift | xargs genstrings -q -o "{}"'.format(
+        cmd = 'find {} {} -and \( -name \*.m -or -name \*.mm -or -name \*.swift \) -print0 | xargs -0 genstrings -q -o "{}" \\;'.format(
             self.path,
             exclusion_options,
             lang)
